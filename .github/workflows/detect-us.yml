@@ -6,6 +6,9 @@ on:
     - cron: '0 22 * * 1-5'   # UTC 22:00 = 한국 07:00
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   detect-us:
     runs-on: ubuntu-latest
