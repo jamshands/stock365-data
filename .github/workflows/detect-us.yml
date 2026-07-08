@@ -1,0 +1,34 @@
+name: Detect USA Stocks
+
+on:
+  schedule:
+    # 미국 장마감 후(한국시간 오전 7시 기준, 서머타임 포함 여유있게)
+    - cron: '0 22 * * 1-5'   # UTC 22:00 = 한국 07:00
+  workflow_dispatch: {}
+
+jobs:
+  detect-us:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run USA detection
+        working-directory: scripts
+        run: python run_detect.py US
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/us/
+          git diff --staged --quiet || git commit -m "chore: update US results $(date -u +%Y-%m-%d\ %H:%M)"
+          git push
