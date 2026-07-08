@@ -153,6 +153,11 @@ def save_split(results: Dict[str, List], meta: Dict, country: str):
     조합별로 개별 JSON 파일 저장.
     data/kr/UP-3-0.json 처럼 저장 → 앱은 필요한 파일만 다운로드.
     index.json에는 각 조합의 종목 개수(count)만 담아 홈 화면 요약에 활용.
+
+    전체 저장 (제한 없음): 개별 파일 최대 크기가 미국 DOWN-1-0 기준
+    약 400KB 수준으로 확인되어(2026-07-08 실측), 상위 N개로 자를 필요 없이
+    전량 저장한다. 예전엔 상위 200개만 저장했으나, 실측 결과 파일 크기가
+    생각보다 작아 제한을 없앰 (한국 전체 1.7MB, 미국 전체 4.1MB 수준).
     """
     out_dir = f"data/{country.lower()}"
     os.makedirs(out_dir, exist_ok=True)
@@ -160,11 +165,9 @@ def save_split(results: Dict[str, List], meta: Dict, country: str):
     index = {"meta": meta, "combos": {}}
 
     for key, arr in results.items():
-        # 상위 200개까지만 저장 (파일 크기 제한)
-        limited = arr[:200]
         with open(f"{out_dir}/{key}.json", "w", encoding="utf-8") as f:
-            json.dump({"meta": meta, "results": limited}, f, ensure_ascii=False, separators=(",", ":"))
-        index["combos"][key] = len(arr)  # 실제 전체 개수 (표시용)
+            json.dump({"meta": meta, "results": arr}, f, ensure_ascii=False, separators=(",", ":"))
+        index["combos"][key] = len(arr)  # 실제 전체 개수 (표시용, 이제 파일 내용과 항상 일치)
 
     with open(f"{out_dir}/index.json", "w", encoding="utf-8") as f:
         json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
