@@ -42,12 +42,22 @@ def analyze_stock(stock: Stock) -> Dict:
         return {"code": stock.code, "detections": []}
 
     closes = chart.closes
-    # 당일 변화율
+    # 당일 변화율.
+    # [버그 수정] 예전엔 야후 meta의 currentPrice/previousClose 조합을 우선 사용했는데,
+    # 이 둘이 서로 다른 기준일을 가리키는 경우가 있어(야후 쪽 데이터 정합성 문제 -
+    # previousClose가 currentPrice와 다른 날짜 기준인 케이스) 변화율이 실제와
+    # 반대 부호/다른 날짜 값으로 나오는 버그가 있었다.
+    # 실사례: 피에스텍(002230) - currentPrice는 정확히 오늘(4,890원)인데
+    # previousClose 기반 계산은 어제자 등락률(-2.95%)을 그대로 보여줌.
+    # 실제 정답은 +10.01%(네이버 확인).
+    # closes 배열은 같은 요청 안에서 뽑힌 연속된 일봉 히스토리라 서로 기준일이
+    # 어긋날 수 없으므로, 이제 이걸 우선 소스로 쓴다. 데이터가 부족할 때만
+    # meta 값으로 폴백한다.
     change_pct = None
-    if chart.current_price and chart.previous_close and chart.previous_close != 0:
-        change_pct = ((chart.current_price - chart.previous_close) / chart.previous_close) * 100.0
-    elif len(closes) >= 2 and closes[-2] != 0:
+    if len(closes) >= 2 and closes[-2] != 0:
         change_pct = ((closes[-1] - closes[-2]) / closes[-2]) * 100.0
+    elif chart.current_price and chart.previous_close and chart.previous_close != 0:
+        change_pct = ((chart.current_price - chart.previous_close) / chart.previous_close) * 100.0
 
     detections = []
     for direction in DIRECTIONS:
@@ -73,6 +83,7 @@ def analyze_stock(stock: Stock) -> Dict:
         "currentChangePct": round(change_pct, 2) if change_pct is not None else None,
         "yearLow": chart.year_low,
         "yearHigh": chart.year_high,
+        "marketCap": chart.market_cap,
         "detections": detections,
     }
 
@@ -80,14 +91,6 @@ def analyze_stock(stock: Stock) -> Dict:
 def build_results(stocks: List[Stock], country: str) -> Dict:
     """
     전종목 분석 후 조합별로 그룹핑한 JSON 구조 생성.
-    결과 구조:
-    {
-      "meta": {...},
-      "results": {
-        "UP-3-0": [ {종목...}, ... ],
-        "DOWN-5-1": [ ... ],
-      }
-    }
     """
     print(f"[{country}] {len(stocks)} 종목 분석 시작...")
     start = time.time()
@@ -104,7 +107,6 @@ def build_results(stocks: List[Stock], country: str) -> Dict:
                 elapsed = time.time() - start
                 print(f"  {done}/{len(stocks)} ({elapsed:.0f}s)")
 
-    # 조합별로 그룹핑
     results: Dict[str, List] = {}
     for item in analyzed:
         if not item.get("detections"):
@@ -119,12 +121,12 @@ def build_results(stocks: List[Stock], country: str) -> Dict:
                 "currentChangePct": item["currentChangePct"],
                 "yearLow": item["yearLow"],
                 "yearHigh": item["yearHigh"],
+                "marketCap": item["marketCap"],
                 "consecutiveDays": det["consecutiveDays"],
                 "totalChangePct": det["totalChangePct"],
                 "direction": det["direction"],
             })
 
-    # 각 조합 내 정렬 (상승 내림차순 / 하락 오름차순)
     for key, arr in results.items():
         is_up = key.startswith("UP")
         arr.sort(key=lambda x: (x["totalChangePct"] or 0), reverse=is_up)
@@ -149,16 +151,6 @@ def build_results(stocks: List[Stock], country: str) -> Dict:
 
 
 def save_split(results: Dict[str, List], meta: Dict, country: str):
-    """
-    조합별로 개별 JSON 파일 저장.
-    data/kr/UP-3-0.json 처럼 저장 → 앱은 필요한 파일만 다운로드.
-    index.json에는 각 조합의 종목 개수(count)만 담아 홈 화면 요약에 활용.
-
-    전체 저장 (제한 없음): 개별 파일 최대 크기가 미국 DOWN-1-0 기준
-    약 400KB 수준으로 확인되어(2026-07-08 실측), 상위 N개로 자를 필요 없이
-    전량 저장한다. 예전엔 상위 200개만 저장했으나, 실측 결과 파일 크기가
-    생각보다 작아 제한을 없앰 (한국 전체 1.7MB, 미국 전체 4.1MB 수준).
-    """
     out_dir = f"data/{country.lower()}"
     os.makedirs(out_dir, exist_ok=True)
 
@@ -167,7 +159,7 @@ def save_split(results: Dict[str, List], meta: Dict, country: str):
     for key, arr in results.items():
         with open(f"{out_dir}/{key}.json", "w", encoding="utf-8") as f:
             json.dump({"meta": meta, "results": arr}, f, ensure_ascii=False, separators=(",", ":"))
-        index["combos"][key] = len(arr)  # 실제 전체 개수 (표시용, 이제 파일 내용과 항상 일치)
+        index["combos"][key] = len(arr)
 
     with open(f"{out_dir}/index.json", "w", encoding="utf-8") as f:
         json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
