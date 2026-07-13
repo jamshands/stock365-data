@@ -1,4 +1,4 @@
 requests>=2.31.0
 pandas==2.2.2
 lxml>=4.9.0
-html5lib>=1.1
+html5lib>=1.1pyarrow>=14.0.0 

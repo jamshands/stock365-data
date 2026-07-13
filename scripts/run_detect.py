@@ -20,6 +20,25 @@ from fetch_tickers import fetch_korea, fetch_usa, Stock
 from fetch_prices import fetch_chart, ChartData
 from trend_detector import detect
 
+# ── Marcap (한국 시가총액) ──
+import pandas as pd
+
+_MARCAP_YEAR = datetime.now().year
+_MARCAP_URL = f"https://raw.githubusercontent.com/FinanceData/marcap/master/data/marcap-{_MARCAP_YEAR}.parquet"
+
+
+def load_marcap_data() -> dict:
+    """KRX 시가총액 데이터 1회 로드. 실패해도 빈 딕셔너리 반환 (서버 중단 금지)."""
+    try:
+        df = pd.read_parquet(_MARCAP_URL)
+        latest = df.sort_values("Date").groupby("Code").tail(1)
+        result = dict(zip(latest["Code"], latest["Marcap"]))
+        print(f"[Marcap] 로드 완료: {len(result)}종목")
+        return result
+    except Exception as e:
+        print(f"[Marcap] 로드 실패 (시총 null 처리): {e}")
+        return {}
+
 # ── 조합 정의 ──
 DAYS_RANGE = range(1, 21)          # 1~20일
 DIRECTIONS = ["UP", "DOWN"]
@@ -31,7 +50,17 @@ REQUEST_DELAY = 0.1                 # 요청 간 최소 간격(초)
 KST = timezone(timedelta(hours=9))
 
 
-def analyze_stock(stock: Stock) -> Dict:
+def _resolve_market_cap(stock: Stock, chart: ChartData, marcap_data: dict):
+    """한국 종목은 marcap에서 시총 조회, 미국은 야후 그대로 사용."""
+    if stock.market in ("KR",) and marcap_data:
+        # 야후 코드(005930.KS / 005930.KQ)에서 접미사 제거
+        pure_code = stock.code.split(".")[0]
+        cap = marcap_data.get(pure_code)
+        return int(cap) if cap is not None else None
+    return chart.market_cap
+
+
+def analyze_stock(stock: Stock, marcap_data: dict = {}) -> Dict:
     """
     한 종목의 차트를 수집하고, 모든 조합에 대해 탐지.
     반환: {"stock": {...}, "detections": [{key, days, direction, ...}]}
@@ -83,7 +112,7 @@ def analyze_stock(stock: Stock) -> Dict:
         "currentChangePct": round(change_pct, 2) if change_pct is not None else None,
         "yearLow": chart.year_low,
         "yearHigh": chart.year_high,
-        "marketCap": chart.market_cap,
+        "marketCap": _resolve_market_cap(stock, chart, marcap_data),
         "detections": detections,
     }
 
@@ -95,9 +124,12 @@ def build_results(stocks: List[Stock], country: str) -> Dict:
     print(f"[{country}] {len(stocks)} 종목 분석 시작...")
     start = time.time()
 
+    # 한국 배치일 때만 marcap 로드 (미국은 빈 딕셔너리 → 야후 그대로 사용)
+    marcap_data = load_marcap_data() if country == "KR" else {}
+
     analyzed = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {executor.submit(analyze_stock, s): s for s in stocks}
+        futures = {executor.submit(analyze_stock, s, marcap_data): s for s in stocks}
         done = 0
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
