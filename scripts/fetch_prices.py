@@ -18,6 +18,11 @@ class ChartData:
     previous_close: Optional[float]
     year_low: Optional[float]
     year_high: Optional[float]
+    market_cap: Optional[float]    # 시가총액. 야후 chart API의 meta에는 원래 없는 필드라
+                                    # 대부분 None으로 채워짐 - 한국 종목의 실제 시총은
+                                    # marketCap 연동(B) 작업에서 별도 소스(marcap)로 채울 예정.
+                                    # 지금은 run_detect.py가 chart.market_cap을 참조하므로
+                                    # AttributeError를 피하기 위해 필드 자체는 유지한다.
 
 
 def fetch_chart(ticker: str, retries: int = 2) -> Optional[ChartData]:
@@ -61,6 +66,7 @@ def fetch_chart(ticker: str, retries: int = 2) -> Optional[ChartData]:
                 previous_close=meta.get("previousClose"),
                 year_low=meta.get("fiftyTwoWeekLow"),
                 year_high=meta.get("fiftyTwoWeekHigh"),
+                market_cap=meta.get("marketCap"),  # 야후 chart API엔 보통 없어 None으로 채워짐 (B 작업에서 대체 예정)
             )
         except Exception as e:
             if attempt < retries:
