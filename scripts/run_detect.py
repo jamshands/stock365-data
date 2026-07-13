@@ -52,7 +52,7 @@ KST = timezone(timedelta(hours=9))
 
 def _resolve_market_cap(stock: Stock, chart: ChartData, marcap_data: dict):
     """한국 종목은 marcap에서 시총 조회, 미국은 야후 그대로 사용."""
-    if stock.market in ("KR",) and marcap_data:
+    if stock.market in ("KOSPI", "KOSDAQ") and marcap_data:
         # 야후 코드(005930.KS / 005930.KQ)에서 접미사 제거
         pure_code = stock.code.split(".")[0]
         cap = marcap_data.get(pure_code)
