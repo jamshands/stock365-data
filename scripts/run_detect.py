@@ -159,12 +159,24 @@ def build_results(stocks: List[Stock], country: str) -> Dict:
                 "direction": det["direction"],
             })
 
+    # 전체 조합(160개) 모두 채워서 반환 - 탐지 0건인 조합도 빈 배열로 명시.
+    # 이렇게 해야 매일 모든 조합 파일이 "오늘 날짜"로 갱신되고,
+    # 예전 탐지결과가 남아있는 파일이 최신인 것처럼 보이는 문제를 방지한다.
+    all_results: Dict[str, List] = {}
+    for direction in DIRECTIONS:
+        for days in DAYS_RANGE:
+            for exc in EXCEPTIONS:
+                key = f"{direction}-{days}-{exc}"
+                all_results[key] = results.get(key, [])
+    results = all_results
+
     for key, arr in results.items():
         is_up = key.startswith("UP")
         arr.sort(key=lambda x: (x["totalChangePct"] or 0), reverse=is_up)
 
     elapsed = time.time() - start
-    print(f"[{country}] 완료: {elapsed:.0f}s, {len(results)} 조합, "
+    detected_combos = sum(1 for arr in results.values() if arr)
+    print(f"[{country}] 완료: {elapsed:.0f}s, {detected_combos}/{len(results)} 조합에 탐지 결과 있음, "
           f"탐지 종목 {sum(len(v) for v in results.values())}건")
 
     now = datetime.now(KST)
@@ -175,7 +187,7 @@ def build_results(stocks: List[Stock], country: str) -> Dict:
             "updatedAt": now.strftime("%Y-%m-%d %H:%M:%S KST"),
             "status": "COMPLETED",
             "totalTickers": len(stocks),
-            "detectedCombos": len(results),
+            "detectedCombos": detected_combos,
             "source": "yahoo",
         },
         "results": results,
