@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-15","updatedAt":"2026-07-15 18:38:49 KST","status":"COMPLETED","totalTickers":2636,"detectedCombos":88,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-16","updatedAt":"2026-07-16 18:15:55 KST","status":"COMPLETED","totalTickers":2636,"detectedCombos":97,"source":"yahoo"},"results":[{"code":"200470.KQ","name":"에이팩트","market":"KOSDAQ","currentPrice":5090.0,"currentChangePct":-9.11,"yearLow":2240.0,"yearHigh":13100.0,"marketCap":213504948720,"consecutiveDays":18,"totalChangePct":-59.02,"direction":"DOWN"}]}
