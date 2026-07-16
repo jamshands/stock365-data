@@ -1,0 +1,39 @@
+name: Fetch Market Data
+
+on:
+  schedule:
+    # 한국 장중: KST 09:00 ~ 15:30 (UTC 00:00 ~ 06:30), 평일
+    - cron: '0,20,40 0,1,2,3,4,5,6 * * 1-5'
+    # 미국 장중: ET 09:30 ~ 16:00 = KST 22:30 ~ 05:00 (UTC 13:30 ~ 21:00), 평일
+    - cron: '0,20,40 13,14,15,16,17,18,19,20 * * 1-5'
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  fetch-market:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout stock365-data
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pandas
+
+      - name: Fetch market data
+        run: python scripts/fetch_market.py
+
+      - name: Commit and push market.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add market.json
+          # 변경사항 없으면 커밋 생략 (에러 방지)
+          git diff --cached --quiet || git commit -m "chore: update market.json"
+          git push
