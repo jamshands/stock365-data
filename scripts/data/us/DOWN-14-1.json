@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-17","updatedAt":"2026-07-17 08:05:16 KST","status":"COMPLETED","totalTickers":6768,"detectedCombos":118,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-18","updatedAt":"2026-07-18 07:57:58 KST","status":"COMPLETED","totalTickers":6768,"detectedCombos":114,"source":"yahoo"},"results":[{"code":"HYPR","name":"HYPR","market":"US","currentPrice":0.9307,"currentChangePct":-5.22,"yearLow":0.85,"yearHigh":2.22,"marketCap":null,"consecutiveDays":14,"totalChangePct":-44.93,"direction":"DOWN"}]}

@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-17","updatedAt":"2026-07-17 08:05:16 KST","status":"COMPLETED","totalTickers":6768,"detectedCombos":118,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-18","updatedAt":"2026-07-18 07:57:58 KST","status":"COMPLETED","totalTickers":6768,"detectedCombos":114,"source":"yahoo"},"results":[{"code":"IREN","name":"IREN","market":"US","currentPrice":33.62,"currentChangePct":-3.47,"yearLow":14.72,"yearHigh":76.87,"marketCap":null,"consecutiveDays":19,"totalChangePct":-44.75,"direction":"DOWN"}]}
