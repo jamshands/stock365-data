@@ -36,19 +36,10 @@ OUTPUT_PATH = "market.json"
 
 
 # ── 데이터 제공 인터페이스 ────────────────────────────
-# 나중에 Finnhub / Alpha Vantage / 한국투자 OpenAPI 등으로 교체 시
-# MarketDataProvider를 새로 구현하고 fetch_market() 내부의 provider만 바꾸면 됨.
-# 앱과 market.json 구조는 변경 불필요.
-
 class MarketDataProvider:
     """증시 데이터 제공자 인터페이스."""
 
     def fetch(self, symbol: str) -> Optional[dict]:
-        """
-        심볼 1개의 현재가 데이터를 반환.
-        반환값: {"price": float, "change": float, "changePercent": float}
-        실패 시 None 반환.
-        """
         raise NotImplementedError
 
 
@@ -77,16 +68,20 @@ class YahooFinanceProvider(MarketDataProvider):
                 meta = r.get("meta", {})
 
                 price = meta.get("regularMarketPrice")
-                prev_close = meta.get("previousClose") or meta.get("chartPreviousClose")
 
                 if price is None:
                     return None
 
-                # 전일 종가가 없으면 closes 배열에서 직접 계산
-                if prev_close is None:
-                    closes_raw = r.get("indicators", {}).get("quote", [{}])[0].get("close", [])
-                    closes = [c for c in closes_raw if c is not None]
-                    prev_close = closes[-2] if len(closes) >= 2 else None
+                # closes 배열(같은 요청 내 연속 일봉)을 1순위로 사용.
+                # previousClose/chartPreviousClose는 종종 regularMarketPrice와 다른
+                # 기준일을 가리켜 등락률이 어긋나는 문제가 있었음
+                # (run_detect.py에서 동일 버그를 이미 겪고 수정한 방식과 동일하게 처리).
+                closes_raw = r.get("indicators", {}).get("quote", [{}])[0].get("close", [])
+                closes = [c for c in closes_raw if c is not None]
+
+                prev_close = closes[-2] if len(closes) >= 2 else (
+                    meta.get("previousClose") or meta.get("chartPreviousClose")
+                )
 
                 change = None
                 change_pct = None
@@ -124,11 +119,6 @@ def load_existing() -> dict:
 
 
 def fetch_market(provider: MarketDataProvider) -> None:
-    """
-    전체 심볼 수집 후 market.json 저장.
-    - 전체 실패 시 기존 파일 유지
-    - 일부 실패 시 성공한 심볼만 갱신, 실패한 심볼은 이전 값 유지
-    """
     existing = load_existing()
     now_kst = datetime.now(KST)
     updated_at = now_kst.strftime("%Y-%m-%dT%H:%M:%S+09:00")
@@ -141,7 +131,7 @@ def fetch_market(provider: MarketDataProvider) -> None:
 
     for symbol, key in SYMBOLS.items():
         result = provider.fetch(symbol)
-        time.sleep(0.2)  # 요청 간 간격
+        time.sleep(0.2)
 
         if result is not None:
             payload[key] = result
@@ -150,19 +140,16 @@ def fetch_market(provider: MarketDataProvider) -> None:
                   f"change={result['change']:>+8.2f}  "
                   f"({result['changePercent']:>+6.2f}%)")
         else:
-            # 실패 시 기존 값 유지
             if key in existing:
                 payload[key] = existing[key]
             fail_count += 1
             print(f"  ❌ {key:10s} 실패 → 기존값 유지")
 
-    # 전체 실패면 저장하지 않음
     if success_count == 0:
         print(f"[Market] 전체 실패 → market.json 유지 (덮어쓰지 않음)")
         return
 
     output = {"updatedAt": updated_at}
-    # SYMBOLS 순서대로 키 정렬
     for key in SYMBOLS.values():
         if key in payload:
             output[key] = payload[key]
