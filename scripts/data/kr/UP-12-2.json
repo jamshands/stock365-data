@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-20","updatedAt":"2026-07-20 13:12:12 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-20","updatedAt":"2026-07-20 19:10:33 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":97,"source":"yahoo"},"results":[{"code":"004270.KS","name":"남성","market":"KOSPI","currentPrice":8050.0,"currentChangePct":3.87,"yearLow":6160.0,"yearHigh":11120.0,"marketCap":28064424000,"consecutiveDays":12,"totalChangePct":25.19,"direction":"UP"}]}

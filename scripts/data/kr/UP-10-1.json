@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-20","updatedAt":"2026-07-20 13:12:12 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-20","updatedAt":"2026-07-20 19:10:33 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":97,"source":"yahoo"},"results":[{"code":"086060.KQ","name":"진바이오텍","market":"KOSDAQ","currentPrice":5110.0,"currentChangePct":0.2,"yearLow":3525.0,"yearHigh":5990.0,"marketCap":43913993700,"consecutiveDays":10,"totalChangePct":19.53,"direction":"UP"}]}
