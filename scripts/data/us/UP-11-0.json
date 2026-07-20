@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-16","updatedAt":"2026-07-16 08:10:11 KST","status":"COMPLETED","totalTickers":6771,"detectedCombos":114,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-18","updatedAt":"2026-07-18 07:57:58 KST","status":"COMPLETED","totalTickers":6768,"detectedCombos":114,"source":"yahoo"},"results":[{"code":"CURV","name":"CURV","market":"US","currentPrice":2.33,"currentChangePct":4.48,"yearLow":0.939,"yearHigh":2.875,"marketCap":null,"consecutiveDays":11,"totalChangePct":33.91,"direction":"UP"}]}

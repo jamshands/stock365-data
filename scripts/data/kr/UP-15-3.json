@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-15","updatedAt":"2026-07-15 18:38:49 KST","status":"COMPLETED","totalTickers":2636,"detectedCombos":88,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-17","updatedAt":"2026-07-17 18:09:49 KST","status":"COMPLETED","totalTickers":2636,"detectedCombos":96,"source":"yahoo"},"results":[{"code":"053060.KQ","name":"세동","market":"KOSDAQ","currentPrice":1444.0,"currentChangePct":0.28,"yearLow":1122.0,"yearHigh":1678.0,"marketCap":25426683360,"consecutiveDays":15,"totalChangePct":14.15,"direction":"UP"}]}

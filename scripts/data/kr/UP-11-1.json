@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-15","updatedAt":"2026-07-15 18:38:49 KST","status":"COMPLETED","totalTickers":2636,"detectedCombos":88,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-17","updatedAt":"2026-07-17 18:09:49 KST","status":"COMPLETED","totalTickers":2636,"detectedCombos":96,"source":"yahoo"},"results":[{"code":"068790.KQ","name":"DMS","market":"KOSDAQ","currentPrice":7190.0,"currentChangePct":1.7,"yearLow":4230.0,"yearHigh":9190.0,"marketCap":159571483680,"consecutiveDays":11,"totalChangePct":40.7,"direction":"UP"}]}
