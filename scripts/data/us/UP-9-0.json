@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-21","updatedAt":"2026-07-21 08:08:05 KST","status":"COMPLETED","totalTickers":6748,"detectedCombos":118,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-22","updatedAt":"2026-07-22 08:07:31 KST","status":"COMPLETED","totalTickers":6729,"detectedCombos":116,"source":"yahoo"},"results":[{"code":"CTRN","name":"CTRN","market":"US","currentPrice":66.83,"currentChangePct":1.8,"yearLow":28.44,"yearHigh":67.23,"marketCap":null,"consecutiveDays":9,"totalChangePct":18.83,"direction":"UP"}]}

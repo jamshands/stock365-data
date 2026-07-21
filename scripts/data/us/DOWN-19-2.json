@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-21","updatedAt":"2026-07-21 08:08:05 KST","status":"COMPLETED","totalTickers":6748,"detectedCombos":118,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-22","updatedAt":"2026-07-22 08:07:31 KST","status":"COMPLETED","totalTickers":6729,"detectedCombos":116,"source":"yahoo"},"results":[{"code":"KALA","name":"KALA","market":"US","currentPrice":0.7334,"currentChangePct":-2.21,"yearLow":0.732,"yearHigh":1030.0,"marketCap":null,"consecutiveDays":19,"totalChangePct":-79.68,"direction":"DOWN"}]}
