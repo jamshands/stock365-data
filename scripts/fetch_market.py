@@ -19,7 +19,11 @@ from typing import Optional
 # ── 설정 ──────────────────────────────────────────────
 KST = timezone(timedelta(hours=9))
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (StockTrend Server)"}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (StockTrend Server)",
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    "Pragma": "no-cache",
+}
 
 # 수집 대상 심볼 → market.json 키 매핑
 SYMBOLS = {
@@ -50,8 +54,11 @@ class YahooFinanceProvider(MarketDataProvider):
 
     def fetch(self, symbol: str) -> Optional[dict]:
         url = self.BASE_URL.format(symbol=symbol)
-        # 5일치로 넉넉히 요청 - 주말/휴장일이 껴도 최근 2개 거래일을 안전하게 확보하기 위함
-        params = {"range": "5d", "interval": "1d"}
+        params = {
+            "range": "5d",
+            "interval": "1d",
+            "_": str(int(time.time() * 1000)),
+        }
 
         for attempt in range(3):
             try:
@@ -75,35 +82,24 @@ class YahooFinanceProvider(MarketDataProvider):
                 timestamps = r.get("timestamp") or []
                 closes_raw = r.get("indicators", {}).get("quote", [{}])[0].get("close", [])
 
-                # timestamp-close 쌍을 만들고, close가 None인 항목(미완성 봉)은 제외
                 pairs = [
                     (ts, c) for ts, c in zip(timestamps, closes_raw) if c is not None
                 ]
 
-                # timestamp(UTC epoch)를 KST 날짜로 변환해서 "날짜별 최신 종가"만 남긴다.
                 by_date: dict[str, float] = {}
                 for ts, c in pairs:
                     date_str = datetime.fromtimestamp(ts, KST).strftime("%Y-%m-%d")
                     by_date[date_str] = c
 
                 sorted_dates = sorted(by_date.keys())
-
-                # 핵심: "오늘 날짜 캔들이 배열에 이미 존재하는지" 먼저 확인한다.
-                # 장중에는 보통 오늘 캔들이 아직 없거나(=배열 마지막이 어제),
-                # 장 마감 후 API가 갱신되면 오늘 캔들이 생길 수 있다(=배열 마지막이 오늘).
-                # 이 두 경우를 구분하지 않고 무조건 "마지막에서 2번째"를 쓰면,
-                # 오늘 캔들이 없을 때 실제로는 "어제"를 가져와야 하는데
-                # 배열 마지막(어제)의 하나 전(그저께 이전, 주말이면 며칠 전)을 잘못 가져오게 된다.
                 today_str = datetime.now(KST).strftime("%Y-%m-%d")
 
                 prev_close = None
                 if sorted_dates:
                     if sorted_dates[-1] == today_str:
-                        # 오늘 캔들이 이미 존재 → 그 직전 날짜가 전일 종가
                         if len(sorted_dates) >= 2:
                             prev_close = by_date[sorted_dates[-2]]
                     else:
-                        # 오늘 캔들이 아직 없음(일반적인 장중 상황) → 배열의 마지막 날짜가 전일 종가
                         prev_close = by_date[sorted_dates[-1]]
 
                 if prev_close is None:
@@ -114,6 +110,9 @@ class YahooFinanceProvider(MarketDataProvider):
                 if prev_close and prev_close != 0:
                     change = round(price - prev_close, 4)
                     change_pct = round((price - prev_close) / prev_close * 100, 2)
+
+                print(f"    [debug] {symbol}: price={price}, sorted_dates={sorted_dates}, "
+                      f"prev_close={prev_close}, meta.previousClose={meta.get('previousClose')}")
 
                 return {
                     "price": round(price, 2),
@@ -134,7 +133,6 @@ class YahooFinanceProvider(MarketDataProvider):
 # ── 메인 로직 ─────────────────────────────────────────
 
 def load_existing() -> dict:
-    """기존 market.json 로드. 없으면 빈 딕셔너리 반환."""
     if os.path.exists(OUTPUT_PATH):
         try:
             with open(OUTPUT_PATH, "r", encoding="utf-8") as f:
