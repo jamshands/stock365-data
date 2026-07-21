@@ -81,26 +81,32 @@ class YahooFinanceProvider(MarketDataProvider):
                 ]
 
                 # timestamp(UTC epoch)를 KST 날짜로 변환해서 "날짜별 최신 종가"만 남긴다.
-                # 같은 날짜에 여러 봉이 잡히는 일은 일봉(interval=1d)에서는 없지만,
-                # 혹시 모를 중복을 방지하기 위해 날짜별로 마지막 값을 취한다.
                 by_date: dict[str, float] = {}
                 for ts, c in pairs:
                     date_str = datetime.fromtimestamp(ts, KST).strftime("%Y-%m-%d")
-                    by_date[date_str] = c  # 같은 날짜면 뒤에 오는 값(더 최신)으로 덮어씀
+                    by_date[date_str] = c
 
-                # 날짜 오름차순 정렬 - 마지막(가장 최근)이 "오늘 또는 최근 거래일 종가",
-                # 그 직전이 "전일 종가"
                 sorted_dates = sorted(by_date.keys())
 
+                # 핵심: "오늘 날짜 캔들이 배열에 이미 존재하는지" 먼저 확인한다.
+                # 장중에는 보통 오늘 캔들이 아직 없거나(=배열 마지막이 어제),
+                # 장 마감 후 API가 갱신되면 오늘 캔들이 생길 수 있다(=배열 마지막이 오늘).
+                # 이 두 경우를 구분하지 않고 무조건 "마지막에서 2번째"를 쓰면,
+                # 오늘 캔들이 없을 때 실제로는 "어제"를 가져와야 하는데
+                # 배열 마지막(어제)의 하나 전(그저께 이전, 주말이면 며칠 전)을 잘못 가져오게 된다.
+                today_str = datetime.now(KST).strftime("%Y-%m-%d")
+
                 prev_close = None
-                if len(sorted_dates) >= 2:
-                    # 가장 최근 날짜의 종가가 이미 regularMarketPrice와 사실상 같은 값(장마감 후)이거나
-                    # 아직 장중이라 다른 값일 수 있음 - 어느 쪽이든 "그 직전 날짜"가 전일 종가로 정확함
-                    prev_close = by_date[sorted_dates[-2]]
-                elif len(sorted_dates) == 1:
-                    # 데이터가 하루치뿐이면 폴백
-                    prev_close = meta.get("previousClose") or meta.get("chartPreviousClose")
-                else:
+                if sorted_dates:
+                    if sorted_dates[-1] == today_str:
+                        # 오늘 캔들이 이미 존재 → 그 직전 날짜가 전일 종가
+                        if len(sorted_dates) >= 2:
+                            prev_close = by_date[sorted_dates[-2]]
+                    else:
+                        # 오늘 캔들이 아직 없음(일반적인 장중 상황) → 배열의 마지막 날짜가 전일 종가
+                        prev_close = by_date[sorted_dates[-1]]
+
+                if prev_close is None:
                     prev_close = meta.get("previousClose") or meta.get("chartPreviousClose")
 
                 change = None
@@ -123,6 +129,7 @@ class YahooFinanceProvider(MarketDataProvider):
                 return None
 
         return None
+
 
 # ── 메인 로직 ─────────────────────────────────────────
 
