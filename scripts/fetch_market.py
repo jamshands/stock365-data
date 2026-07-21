@@ -25,7 +25,6 @@ HEADERS = {
     "Pragma": "no-cache",
 }
 
-# 수집 대상 심볼 → market.json 키 매핑
 SYMBOLS = {
     "^KS11":  "kospi",
     "^KQ11":  "kosdaq",
@@ -39,7 +38,6 @@ SYMBOLS = {
 OUTPUT_PATH = "market.json"
 
 
-# ── 데이터 제공 인터페이스 ────────────────────────────
 class MarketDataProvider:
     """증시 데이터 제공자 인터페이스."""
 
@@ -48,7 +46,15 @@ class MarketDataProvider:
 
 
 class YahooFinanceProvider(MarketDataProvider):
-    """Yahoo Finance v8 chart API를 사용하는 구현체."""
+    """Yahoo Finance v8 chart API를 사용하는 구현체.
+
+    등락률 계산 우선순위:
+      1) meta.regularMarketChangePercent / regularMarketChange
+         - Yahoo가 자체적으로 "현재 시점 기준" 등락을 계산해서 주는 값.
+           우리가 5d 종가 배열을 직접 비교하는 것보다 기준일 어긋남 위험이 적다.
+      2) 위 값이 없으면, 5일치 종가 배열에서 날짜 매칭으로 전일 종가를 찾아 직접 계산 (fallback)
+      3) 그마저 안 되면 meta.previousClose / chartPreviousClose로 계산 (최종 fallback)
+    """
 
     BASE_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
 
@@ -57,7 +63,7 @@ class YahooFinanceProvider(MarketDataProvider):
         params = {
             "range": "5d",
             "interval": "1d",
-            "_": str(int(time.time() * 1000)),
+            "_": str(int(time.time() * 1000)),  # 캐시 무효화
         }
 
         for attempt in range(3):
@@ -79,12 +85,23 @@ class YahooFinanceProvider(MarketDataProvider):
                 if price is None:
                     return None
 
+                # ── 1순위: Yahoo가 직접 제공하는 당일 등락 ──
+                change = meta.get("regularMarketChange")
+                change_pct = meta.get("regularMarketChangePercent")
+
+                if change is not None and change_pct is not None:
+                    print(f"    [debug] {symbol}: using meta.regularMarketChange* "
+                          f"price={price}, change={change}, change_pct={change_pct}")
+                    return {
+                        "price": round(price, 2),
+                        "change": round(change, 4),
+                        "changePercent": round(change_pct, 2),
+                    }
+
+                # ── 2순위: 5일치 종가 배열에서 날짜 매칭으로 직접 계산 (fallback) ──
                 timestamps = r.get("timestamp") or []
                 closes_raw = r.get("indicators", {}).get("quote", [{}])[0].get("close", [])
-
-                pairs = [
-                    (ts, c) for ts, c in zip(timestamps, closes_raw) if c is not None
-                ]
+                pairs = [(ts, c) for ts, c in zip(timestamps, closes_raw) if c is not None]
 
                 by_date: dict[str, float] = {}
                 for ts, c in pairs:
@@ -102,22 +119,24 @@ class YahooFinanceProvider(MarketDataProvider):
                     else:
                         prev_close = by_date[sorted_dates[-1]]
 
+                # ── 3순위: meta.previousClose 폴백 ──
                 if prev_close is None:
                     prev_close = meta.get("previousClose") or meta.get("chartPreviousClose")
 
-                change = None
-                change_pct = None
+                calc_change = None
+                calc_change_pct = None
                 if prev_close and prev_close != 0:
-                    change = round(price - prev_close, 4)
-                    change_pct = round((price - prev_close) / prev_close * 100, 2)
+                    calc_change = round(price - prev_close, 4)
+                    calc_change_pct = round((price - prev_close) / prev_close * 100, 2)
 
-                print(f"    [debug] {symbol}: price={price}, sorted_dates={sorted_dates}, "
-                      f"prev_close={prev_close}, meta.previousClose={meta.get('previousClose')}")
+                print(f"    [debug] {symbol}: fallback calc, price={price}, "
+                      f"sorted_dates={sorted_dates}, prev_close={prev_close}, "
+                      f"meta.previousClose={meta.get('previousClose')}")
 
                 return {
                     "price": round(price, 2),
-                    "change": change,
-                    "changePercent": change_pct,
+                    "change": calc_change,
+                    "changePercent": calc_change_pct,
                 }
 
             except Exception as e:
@@ -129,8 +148,6 @@ class YahooFinanceProvider(MarketDataProvider):
 
         return None
 
-
-# ── 메인 로직 ─────────────────────────────────────────
 
 def load_existing() -> dict:
     if os.path.exists(OUTPUT_PATH):
