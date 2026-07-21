@@ -50,7 +50,8 @@ class YahooFinanceProvider(MarketDataProvider):
 
     def fetch(self, symbol: str) -> Optional[dict]:
         url = self.BASE_URL.format(symbol=symbol)
-        params = {"range": "2d", "interval": "1d"}  # 2일치면 전일 종가 확보 가능
+        # 5일치로 넉넉히 요청 - 주말/휴장일이 껴도 최근 2개 거래일을 안전하게 확보하기 위함
+        params = {"range": "5d", "interval": "1d"}
 
         for attempt in range(3):
             try:
@@ -68,20 +69,39 @@ class YahooFinanceProvider(MarketDataProvider):
                 meta = r.get("meta", {})
 
                 price = meta.get("regularMarketPrice")
-
                 if price is None:
                     return None
 
-                # closes 배열(같은 요청 내 연속 일봉)을 1순위로 사용.
-                # previousClose/chartPreviousClose는 종종 regularMarketPrice와 다른
-                # 기준일을 가리켜 등락률이 어긋나는 문제가 있었음
-                # (run_detect.py에서 동일 버그를 이미 겪고 수정한 방식과 동일하게 처리).
+                timestamps = r.get("timestamp") or []
                 closes_raw = r.get("indicators", {}).get("quote", [{}])[0].get("close", [])
-                closes = [c for c in closes_raw if c is not None]
 
-                prev_close = closes[-2] if len(closes) >= 2 else (
-                    meta.get("previousClose") or meta.get("chartPreviousClose")
-                )
+                # timestamp-close 쌍을 만들고, close가 None인 항목(미완성 봉)은 제외
+                pairs = [
+                    (ts, c) for ts, c in zip(timestamps, closes_raw) if c is not None
+                ]
+
+                # timestamp(UTC epoch)를 KST 날짜로 변환해서 "날짜별 최신 종가"만 남긴다.
+                # 같은 날짜에 여러 봉이 잡히는 일은 일봉(interval=1d)에서는 없지만,
+                # 혹시 모를 중복을 방지하기 위해 날짜별로 마지막 값을 취한다.
+                by_date: dict[str, float] = {}
+                for ts, c in pairs:
+                    date_str = datetime.fromtimestamp(ts, KST).strftime("%Y-%m-%d")
+                    by_date[date_str] = c  # 같은 날짜면 뒤에 오는 값(더 최신)으로 덮어씀
+
+                # 날짜 오름차순 정렬 - 마지막(가장 최근)이 "오늘 또는 최근 거래일 종가",
+                # 그 직전이 "전일 종가"
+                sorted_dates = sorted(by_date.keys())
+
+                prev_close = None
+                if len(sorted_dates) >= 2:
+                    # 가장 최근 날짜의 종가가 이미 regularMarketPrice와 사실상 같은 값(장마감 후)이거나
+                    # 아직 장중이라 다른 값일 수 있음 - 어느 쪽이든 "그 직전 날짜"가 전일 종가로 정확함
+                    prev_close = by_date[sorted_dates[-2]]
+                elif len(sorted_dates) == 1:
+                    # 데이터가 하루치뿐이면 폴백
+                    prev_close = meta.get("previousClose") or meta.get("chartPreviousClose")
+                else:
+                    prev_close = meta.get("previousClose") or meta.get("chartPreviousClose")
 
                 change = None
                 change_pct = None
@@ -103,7 +123,6 @@ class YahooFinanceProvider(MarketDataProvider):
                 return None
 
         return None
-
 
 # ── 메인 로직 ─────────────────────────────────────────
 
