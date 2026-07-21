@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-20","updatedAt":"2026-07-20 19:10:33 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":97,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-21","updatedAt":"2026-07-21 18:28:15 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":99,"source":"yahoo"},"results":[{"code":"403550.KS","name":"쏘카","market":"KOSPI","currentPrice":9560.0,"currentChangePct":-2.94,"yearLow":9390.0,"yearHigh":21000.0,"marketCap":376364224640,"consecutiveDays":13,"totalChangePct":-19.12,"direction":"DOWN"}]}
