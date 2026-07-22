@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-22","updatedAt":"2026-07-22 08:07:31 KST","status":"COMPLETED","totalTickers":6729,"detectedCombos":116,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-23","updatedAt":"2026-07-23 08:16:25 KST","status":"COMPLETED","totalTickers":6782,"detectedCombos":117,"source":"yahoo"},"results":[{"code":"RITR","name":"RITR","market":"US","currentPrice":0.1407,"currentChangePct":-8.64,"yearLow":0.133,"yearHigh":7.68,"marketCap":null,"consecutiveDays":16,"totalChangePct":-72.41,"direction":"DOWN"}]}

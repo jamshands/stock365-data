@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-22","updatedAt":"2026-07-22 08:07:31 KST","status":"COMPLETED","totalTickers":6729,"detectedCombos":116,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-23","updatedAt":"2026-07-23 08:16:25 KST","status":"COMPLETED","totalTickers":6782,"detectedCombos":117,"source":"yahoo"},"results":[{"code":"QTI","name":"QTI","market":"US","currentPrice":2.92,"currentChangePct":-5.5,"yearLow":2.9,"yearHigh":46.05,"marketCap":null,"consecutiveDays":13,"totalChangePct":-27.9,"direction":"DOWN"}]}
