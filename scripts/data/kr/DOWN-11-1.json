@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-21","updatedAt":"2026-07-21 18:28:15 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":99,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-22","updatedAt":"2026-07-22 18:27:00 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[{"code":"299660.KQ","name":"셀리드","market":"KOSDAQ","currentPrice":1025.0,"currentChangePct":-0.77,"yearLow":973.0,"yearHigh":4760.0,"marketCap":31597688367,"consecutiveDays":11,"totalChangePct":-28.97,"direction":"DOWN"}]}
