@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-22","updatedAt":"2026-07-22 18:27:00 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[{"code":"227610.KQ","name":"아우딘퓨쳐스","market":"KOSDAQ","currentPrice":1486.0,"currentChangePct":1.09,"yearLow":725.0,"yearHigh":2376.0,"marketCap":27725011101,"consecutiveDays":9,"totalChangePct":54.63,"direction":"UP"}]}

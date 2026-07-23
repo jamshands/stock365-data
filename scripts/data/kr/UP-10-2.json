@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-22","updatedAt":"2026-07-22 18:27:00 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[{"code":"014100.KQ","name":"메디앙스","market":"KOSDAQ","currentPrice":1888.0,"currentChangePct":0.8,"yearLow":1126.0,"yearHigh":2190.0,"marketCap":22290200000,"consecutiveDays":10,"totalChangePct":9.39,"direction":"UP"}]}

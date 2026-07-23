@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-22","updatedAt":"2026-07-22 18:27:00 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[{"code":"145270.KS","name":"케이탑리츠","market":"KOSPI","currentPrice":807.0,"currentChangePct":1.0,"yearLow":726.0,"yearHigh":975.0,"marketCap":38112193782,"consecutiveDays":8,"totalChangePct":10.1,"direction":"UP"}]}

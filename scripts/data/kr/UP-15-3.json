@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-22","updatedAt":"2026-07-22 18:27:00 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[{"code":"035610.KQ","name":"솔본","market":"KOSDAQ","currentPrice":4800.0,"currentChangePct":1.37,"yearLow":3155.0,"yearHigh":4940.0,"marketCap":130850595645,"consecutiveDays":15,"totalChangePct":45.02,"direction":"UP"}]}

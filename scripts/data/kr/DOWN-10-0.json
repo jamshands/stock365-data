@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-22","updatedAt":"2026-07-22 18:27:00 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":93,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[{"code":"214330.KS","name":"금호에이치티","market":"KOSPI","currentPrice":4950.0,"currentChangePct":-0.2,"yearLow":4880.0,"yearHigh":13180.0,"marketCap":53121199320,"consecutiveDays":10,"totalChangePct":-45.18,"direction":"DOWN"}]}
