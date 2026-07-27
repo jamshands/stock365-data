@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-27","updatedAt":"2026-07-27 19:43:30 KST","status":"COMPLETED","totalTickers":2634,"detectedCombos":85,"source":"yahoo"},"results":[{"code":"007530.KQ","name":"와이엠","market":"KOSDAQ","currentPrice":1594.0,"currentChangePct":-3.51,"yearLow":1555.0,"yearHigh":3005.0,"marketCap":37787684238,"consecutiveDays":8,"totalChangePct":-16.89,"direction":"DOWN"}]}

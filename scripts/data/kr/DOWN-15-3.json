@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-23","updatedAt":"2026-07-23 18:25:09 KST","status":"COMPLETED","totalTickers":2635,"detectedCombos":84,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-27","updatedAt":"2026-07-27 19:43:30 KST","status":"COMPLETED","totalTickers":2634,"detectedCombos":85,"source":"yahoo"},"results":[{"code":"261780.KQ","name":"아리바이오LAB","market":"KOSDAQ","currentPrice":2250.0,"currentChangePct":-0.44,"yearLow":2220.0,"yearHigh":6720.0,"marketCap":66252904245,"consecutiveDays":15,"totalChangePct":-23.47,"direction":"DOWN"}]}
