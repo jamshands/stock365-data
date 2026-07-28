@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-27","updatedAt":"2026-07-27 19:43:30 KST","status":"COMPLETED","totalTickers":2634,"detectedCombos":85,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-07-28","updatedAt":"2026-07-28 18:38:36 KST","status":"COMPLETED","totalTickers":2633,"detectedCombos":87,"source":"yahoo"},"results":[{"code":"381970.KS","name":"케이카","market":"KOSPI","currentPrice":7190.0,"currentChangePct":-4.77,"yearLow":7120.0,"yearHigh":16970.0,"marketCap":361762483680,"consecutiveDays":14,"totalChangePct":-14.81,"direction":"DOWN"}]}
