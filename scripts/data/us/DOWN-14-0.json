@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-07-30","updatedAt":"2026-07-30 08:04:56 KST","status":"COMPLETED","totalTickers":6755,"detectedCombos":111,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-07-31","updatedAt":"2026-07-31 08:16:13 KST","status":"COMPLETED","totalTickers":6767,"detectedCombos":115,"source":"yahoo"},"results":[{"code":"BBLG","name":"BBLG","market":"US","currentPrice":0.8601,"currentChangePct":-4.96,"yearLow":0.854,"yearHigh":4.13,"marketCap":null,"consecutiveDays":14,"totalChangePct":-38.12,"direction":"DOWN"}]}
