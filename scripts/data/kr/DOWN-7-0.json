@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-31","updatedAt":"2026-07-31 18:45:17 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":76,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-03","updatedAt":"2026-08-03 19:44:06 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":83,"source":"yahoo"},"results":[{"code":"137950.KQ","name":"제이씨케미칼","market":"KOSDAQ","currentPrice":2580.0,"currentChangePct":-4.27,"yearLow":2400.0,"yearHigh":6480.0,"marketCap":60345775940,"consecutiveDays":7,"totalChangePct":-20.25,"direction":"DOWN"}]}

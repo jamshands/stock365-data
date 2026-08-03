@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-07-31","updatedAt":"2026-07-31 18:45:17 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":76,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-03","updatedAt":"2026-08-03 19:44:06 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":83,"source":"yahoo"},"results":[{"code":"489460.KQ","name":"바이오비쥬","market":"KOSDAQ","currentPrice":10970.0,"currentChangePct":4.48,"yearLow":5610.0,"yearHigh":19600.0,"marketCap":143106883900,"consecutiveDays":10,"totalChangePct":75.24,"direction":"UP"}]}
