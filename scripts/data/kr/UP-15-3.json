@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-08-04","updatedAt":"2026-08-04 18:40:07 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":79,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-05","updatedAt":"2026-08-05 18:38:26 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":76,"source":"yahoo"},"results":[{"code":"094280.KS","name":"효성 ITX","market":"KOSPI","currentPrice":12130.0,"currentChangePct":0.25,"yearLow":11410.0,"yearHigh":13900.0,"marketCap":138698400000,"consecutiveDays":15,"totalChangePct":2.97,"direction":"UP"}]}
