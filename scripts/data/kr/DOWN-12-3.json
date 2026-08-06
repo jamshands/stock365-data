@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-08-05","updatedAt":"2026-08-05 18:38:26 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":76,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-06","updatedAt":"2026-08-06 18:40:06 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":77,"source":"yahoo"},"results":[{"code":"008040.KS","name":"사조동아원","market":"KOSPI","currentPrice":642.0,"currentChangePct":-9.07,"yearLow":624.0,"yearHigh":1536.0,"marketCap":100353810600,"consecutiveDays":12,"totalChangePct":-22.65,"direction":"DOWN"}]}
