@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-07","updatedAt":"2026-08-07 10:35:01 KST","status":"COMPLETED","totalTickers":6833,"detectedCombos":111,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-08","updatedAt":"2026-08-08 07:44:06 KST","status":"COMPLETED","totalTickers":6833,"detectedCombos":106,"source":"yahoo"},"results":[{"code":"KRT","name":"KRT","market":"US","currentPrice":47.09,"currentChangePct":11.14,"yearLow":20.61,"yearHigh":50.0,"marketCap":null,"consecutiveDays":19,"totalChangePct":41.07,"direction":"UP"}]}
