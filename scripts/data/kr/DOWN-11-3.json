@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-08-07","updatedAt":"2026-08-07 17:14:51 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":82,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-10","updatedAt":"2026-08-10 17:27:02 KST","status":"COMPLETED","totalTickers":2631,"detectedCombos":82,"source":"yahoo"},"results":[{"code":"133820.KS","name":"화인베스틸","market":"KOSPI","currentPrice":956.0,"currentChangePct":-0.1,"yearLow":901.0,"yearHigh":2950.0,"marketCap":36001066940,"consecutiveDays":11,"totalChangePct":-18.91,"direction":"DOWN"}]}
