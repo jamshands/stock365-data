@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-08","updatedAt":"2026-08-08 07:44:06 KST","status":"COMPLETED","totalTickers":6833,"detectedCombos":106,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-11","updatedAt":"2026-08-11 07:45:29 KST","status":"COMPLETED","totalTickers":6755,"detectedCombos":112,"source":"yahoo"},"results":[{"code":"VWAV","name":"VWAV","market":"US","currentPrice":1.26,"currentChangePct":-10.0,"yearLow":1.2,"yearHigh":15.8,"marketCap":null,"consecutiveDays":19,"totalChangePct":-71.36,"direction":"DOWN"}]}

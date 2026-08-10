@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-08","updatedAt":"2026-08-08 07:44:06 KST","status":"COMPLETED","totalTickers":6833,"detectedCombos":106,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-11","updatedAt":"2026-08-11 07:45:29 KST","status":"COMPLETED","totalTickers":6755,"detectedCombos":112,"source":"yahoo"},"results":[{"code":"NIVF","name":"NIVF","market":"US","currentPrice":0.6086,"currentChangePct":-3.24,"yearLow":0.558,"yearHigh":513.0,"marketCap":null,"consecutiveDays":16,"totalChangePct":-57.44,"direction":"DOWN"}]}
