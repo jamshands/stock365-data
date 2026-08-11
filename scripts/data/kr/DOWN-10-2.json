@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-08-10","updatedAt":"2026-08-10 17:27:02 KST","status":"COMPLETED","totalTickers":2631,"detectedCombos":82,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-11","updatedAt":"2026-08-11 17:09:54 KST","status":"COMPLETED","totalTickers":2630,"detectedCombos":82,"source":"yahoo"},"results":[{"code":"123750.KQ","name":"알톤","market":"KOSDAQ","currentPrice":1735.0,"currentChangePct":-1.87,"yearLow":1265.0,"yearHigh":3500.0,"marketCap":24460088430,"consecutiveDays":10,"totalChangePct":-18.16,"direction":"DOWN"}]}
