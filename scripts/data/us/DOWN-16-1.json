@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-12","updatedAt":"2026-08-12 07:56:34 KST","status":"COMPLETED","totalTickers":6776,"detectedCombos":115,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-13","updatedAt":"2026-08-13 07:49:40 KST","status":"COMPLETED","totalTickers":6759,"detectedCombos":108,"source":"yahoo"},"results":[{"code":"NXTT","name":"NXTT","market":"US","currentPrice":6.15,"currentChangePct":-4.21,"yearLow":5.22,"yearHigh":30600.0,"marketCap":null,"consecutiveDays":16,"totalChangePct":570.67,"direction":"DOWN"}]}
