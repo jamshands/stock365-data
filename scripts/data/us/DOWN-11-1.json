@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-13","updatedAt":"2026-08-13 07:49:40 KST","status":"COMPLETED","totalTickers":6759,"detectedCombos":108,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-14","updatedAt":"2026-08-14 07:50:31 KST","status":"COMPLETED","totalTickers":6739,"detectedCombos":110,"source":"yahoo"},"results":[{"code":"CHAI","name":"CHAI","market":"US","currentPrice":0.292,"currentChangePct":-2.18,"yearLow":0.289,"yearHigh":15.68,"marketCap":null,"consecutiveDays":11,"totalChangePct":-37.98,"direction":"DOWN"}]}
