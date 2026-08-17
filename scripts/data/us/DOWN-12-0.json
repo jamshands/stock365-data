@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-15","updatedAt":"2026-08-15 07:31:02 KST","status":"COMPLETED","totalTickers":6753,"detectedCombos":108,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-18","updatedAt":"2026-08-18 07:32:59 KST","status":"COMPLETED","totalTickers":6766,"detectedCombos":110,"source":"yahoo"},"results":[{"code":"GYGY","name":"GYGY","market":"US","currentPrice":1.93,"currentChangePct":-11.06,"yearLow":1.8,"yearHigh":32.66,"marketCap":null,"consecutiveDays":12,"totalChangePct":-87.92,"direction":"DOWN"}]}

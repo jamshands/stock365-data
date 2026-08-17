@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-15","updatedAt":"2026-08-15 07:31:02 KST","status":"COMPLETED","totalTickers":6753,"detectedCombos":108,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-18","updatedAt":"2026-08-18 07:32:59 KST","status":"COMPLETED","totalTickers":6766,"detectedCombos":110,"source":"yahoo"},"results":[{"code":"QNCX","name":"QNCX","market":"US","currentPrice":34.12,"currentChangePct":0.24,"yearLow":15.1,"yearHigh":910.0,"marketCap":null,"consecutiveDays":14,"totalChangePct":91.15,"direction":"UP"}]}

@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-15","updatedAt":"2026-08-15 07:31:02 KST","status":"COMPLETED","totalTickers":6753,"detectedCombos":108,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-18","updatedAt":"2026-08-18 07:32:59 KST","status":"COMPLETED","totalTickers":6766,"detectedCombos":110,"source":"yahoo"},"results":[{"code":"ROL","name":"ROL","market":"US","currentPrice":36.02,"currentChangePct":-0.5,"yearLow":35.921,"yearHigh":66.14,"marketCap":null,"consecutiveDays":19,"totalChangePct":-20.77,"direction":"DOWN"}]}
