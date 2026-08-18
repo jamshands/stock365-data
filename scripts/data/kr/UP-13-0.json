@@ -1,1 +1,1 @@
-{"meta":{"country":"KR","date":"2026-08-17","updatedAt":"2026-08-17 16:53:28 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":85,"source":"yahoo"},"results":[]}
+{"meta":{"country":"KR","date":"2026-08-18","updatedAt":"2026-08-18 16:38:05 KST","status":"COMPLETED","totalTickers":2632,"detectedCombos":91,"source":"yahoo"},"results":[{"code":"101240.KQ","name":"씨큐브","market":"KOSDAQ","currentPrice":3700.0,"currentChangePct":7.25,"yearLow":2680.0,"yearHigh":5300.0,"marketCap":39181829400,"consecutiveDays":13,"totalChangePct":28.25,"direction":"UP"}]}
