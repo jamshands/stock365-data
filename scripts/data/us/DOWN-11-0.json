@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-18","updatedAt":"2026-08-18 07:32:59 KST","status":"COMPLETED","totalTickers":6766,"detectedCombos":110,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-19","updatedAt":"2026-08-19 07:31:11 KST","status":"COMPLETED","totalTickers":6804,"detectedCombos":112,"source":"yahoo"},"results":[{"code":"BBD","name":"BBD","market":"US","currentPrice":3.04,"currentChangePct":-1.62,"yearLow":2.84,"yearHigh":4.3,"marketCap":null,"consecutiveDays":11,"totalChangePct":-16.02,"direction":"DOWN"}]}

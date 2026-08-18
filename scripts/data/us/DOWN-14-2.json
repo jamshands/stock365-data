@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-18","updatedAt":"2026-08-18 07:32:59 KST","status":"COMPLETED","totalTickers":6766,"detectedCombos":110,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-19","updatedAt":"2026-08-19 07:31:11 KST","status":"COMPLETED","totalTickers":6804,"detectedCombos":112,"source":"yahoo"},"results":[{"code":"SKT","name":"SKT","market":"US","currentPrice":38.32,"currentChangePct":-0.23,"yearLow":31.13,"yearHigh":42.53,"marketCap":null,"consecutiveDays":14,"totalChangePct":-8.61,"direction":"DOWN"}]}

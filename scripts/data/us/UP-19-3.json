@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-18","updatedAt":"2026-08-18 07:32:59 KST","status":"COMPLETED","totalTickers":6766,"detectedCombos":110,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-19","updatedAt":"2026-08-19 07:31:11 KST","status":"COMPLETED","totalTickers":6804,"detectedCombos":112,"source":"yahoo"},"results":[{"code":"SMJF","name":"SMJF","market":"US","currentPrice":10.88,"currentChangePct":4.11,"yearLow":0.82,"yearHigh":10.9,"marketCap":null,"consecutiveDays":19,"totalChangePct":113.33,"direction":"UP"}]}
