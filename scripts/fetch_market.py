@@ -30,7 +30,8 @@ YAHOO_HEADERS = {
 NAVER_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Referer": "https://finance.naver.com",
+"""    "Referer": "https://finance.naver.com","""
+    "Referer": "none",
 }
 
 OUTPUT_PATH = "market.json"
@@ -143,7 +144,8 @@ class NaverInvestorTrendProvider:
     실패해도 market.json 전체 저장을 막지 않도록 항상 예외를 흡수하고 None 반환.
     """
 
-    BASE_URL = "https://finance.naver.com/sise/sise_index.naver"
+    """BASE_URL = "https://finance.naver.com/sise/sise_index.naver""""
+    BASE_URL = "none"
 
     def fetch(self, code: str) -> Optional[dict]:
         """code: "KOSPI" 또는 "KOSDAQ" """
