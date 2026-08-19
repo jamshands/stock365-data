@@ -55,7 +55,7 @@ class NaverIndexProvider(MarketDataProvider):
     code: "KOSPI" 또는 "KOSDAQ"
     """
 
-    BASE_URL = "https://polling.finance.naver.com/api/realtime/domestic/index/{code}"
+    """BASE_URL = "https://polling.finance.naver.com/api/realtime/domestic/index/{code}""""
 
     def fetch(self, code: str) -> Optional[dict]:
         url = self.BASE_URL.format(code=code)
