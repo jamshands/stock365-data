@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-20","updatedAt":"2026-08-20 07:35:55 KST","status":"COMPLETED","totalTickers":6819,"detectedCombos":113,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-21","updatedAt":"2026-08-21 07:35:48 KST","status":"COMPLETED","totalTickers":6825,"detectedCombos":111,"source":"yahoo"},"results":[{"code":"LOMA","name":"LOMA","market":"US","currentPrice":9.32,"currentChangePct":-1.06,"yearLow":7.04,"yearHigh":13.2,"marketCap":null,"consecutiveDays":13,"totalChangePct":-21.35,"direction":"DOWN"}]}

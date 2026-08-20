@@ -1,1 +1,1 @@
-{"meta":{"country":"US","date":"2026-08-20","updatedAt":"2026-08-20 07:35:55 KST","status":"COMPLETED","totalTickers":6819,"detectedCombos":113,"source":"yahoo"},"results":[]}
+{"meta":{"country":"US","date":"2026-08-21","updatedAt":"2026-08-21 07:35:48 KST","status":"COMPLETED","totalTickers":6825,"detectedCombos":111,"source":"yahoo"},"results":[{"code":"RYAAY","name":"RYAAY","market":"US","currentPrice":54.51,"currentChangePct":-0.51,"yearLow":53.14,"yearHigh":74.24,"marketCap":null,"consecutiveDays":11,"totalChangePct":-10.92,"direction":"DOWN"}]}
